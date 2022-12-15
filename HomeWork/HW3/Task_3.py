@@ -18,8 +18,8 @@ while j < len(number_list):
         del number_list[j]
     else:
         j += 1
-maxim = max(number_list[::], key=rub)
+maxim = max(number_list, key=rub)
 print(f"С максимальной дробной частью: {maxim}")
-minim = min(number_list[::], key=rub)
+minim = min(number_list, key=rub)
 print(f"С минимальной дробной частью: {minim}")
 print(f"Разница: {round(rub(maxim - minim),2)}")
