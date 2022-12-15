@@ -1,4 +1,10 @@
-number = int(input("Введите число: "))
-negafib3 = lambda n: n if n < 2  else negafib3(n - 1) + negafib3(n - 2)
-negafib4 = lambda n: negafib3(n) if n >= 0 else round(negafib4(abs(n)) * (-1)**(n + 1))
-print([negafib4(num) for num in range(-number, number + 1)])
+# Дана последовательность из N целых чисел и число K. Необходимо сдвинуть всю последовательность 
+# (сдвиг - циклический) на |K| элементов вправо, если K – положительное и влево, если отрицательное.
+
+from random import randint as rnd
+
+number_list = [rnd(0, 10) for i in range(int(input("Количество элементов? ")))]
+print(number_list)
+sdvig = int(input('Введите сдвиг: '))
+sdvig = sdvig % len(number_list)
+print(number_list[-sdvig:]+number_list[:-sdvig])
