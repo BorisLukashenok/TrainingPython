@@ -20,17 +20,17 @@ while True:
             dicts[lists[1]] += [lists[0]]
     elif stroka == "":
         break
-print('Друзья первого рукопожатия')
+print("Друзья первого рукопожатия")
 print_dikt(dicts)
 dicts2 = {}
 lists = list()
 for i in dicts:
     for j in dicts[i]:
-        lists += list(dicts.get(j))
-        while i in lists:
-            lists.remove(i)
-    lists = list(set(lists))
+        lists += list(dicts.get(j))  # добавляем друзей друзей
+        while i in lists:  # удаляем текушую фамилию
+            lists.remove(i)  
+    lists = list(set(lists))  # удаляем повторы
     dicts2[i] = lists
     lists = list()
-print('Друзья второго рукопожатия')
+print("Друзья второго рукопожатия")
 print_dikt(dicts2)
