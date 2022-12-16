@@ -5,20 +5,15 @@ def print_dikt(slovar):
 
 
 def rev(n):
-    if n == 0:
-        n = 1
-    else:
-        n = 0
-    return n
+    return 1 if n == 0 else 0
 
 
 dicts = dict()
 lists = list()
 flag = True
 while flag:
-    stroka = input()
-    if stroka != "":
-        lists = stroka.split(" ")
+    lists = input().split(" ")
+    if len(lists) != 1:
         for i in range(2):
             if lists[i] not in dicts:
                 dicts[lists[i]] = [lists[rev(i)]]
