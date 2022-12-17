@@ -8,29 +8,30 @@ def rev(n):
     return 1 if n == 0 else 0
 
 
-dicts = dict()
+frend = dict()
 lists = list()
 flag = True
 while flag:
     lists = input().split(" ")
     if len(lists) != 1:
         for i in range(2):
-            if lists[i] not in dicts:
-                dicts[lists[i]] = [lists[rev(i)]]
+            if lists[i] not in frend:
+                frend[lists[i]] = [lists[rev(i)]]
             else:
-                dicts[lists[i]] += [lists[rev(i)]]
+                frend[lists[i]] += [lists[rev(i)]]
     else:
         flag = not flag
 
 print("Друзья первого рукопожатия")
-print_dikt(dicts)
-dicts2 = {}
-for i in dicts:
-    dicts2[i] = list()
-    for j in dicts[i]:
-        dicts2[i] += dicts.get(j)  # добавляем друзей друзей
-        while i in dicts2[i]:  # удаляем текушую фамилию
-            dicts2[i].remove(i)
-    dicts2[i] = list(set(dicts2[i]))  # удаляем повторы
+print_dikt(frend)
+frend_hand = {}
+for i in frend:
+    frend_hand[i] = list()
+    for j in frend[i]:
+        frend_hand[i] += frend.get(j)  # добавляем друзей друзей
+    frend_hand[i] = list(set(frend_hand[i]))  # удаляем повторы
+    while i in frend_hand[i]:  # удаляем текущую фамилию
+        frend_hand[i].remove(i)
+
 print("Друзья второго рукопожатия")
-print_dikt(dicts2)
+print_dikt(frend_hand)

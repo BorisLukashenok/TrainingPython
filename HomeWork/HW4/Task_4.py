@@ -8,16 +8,21 @@ stroka = str()
 for i in range(stepen,-1,-1):
     multiplier = rnd(0,100)
     if multiplier!=0:
-        if i!=0:
-            lists+=[f'{multiplier}X^{i}']
+        if multiplier==1:
+            temp=''
         else:
-            lists+=[f'{multiplier}']
+            temp=str(multiplier)
+        if i not in [0,1]:
+            lists+=[f'{temp}X^{i}']
+        elif i == 1:
+            lists+=[f'{temp}X']
+        else:
+            lists+=[f'{temp}']
 for i in range(len(lists)):
     if i!=len(lists)-1:
         stroka+=f'{lists[i]} + '
     else:
         stroka+=f'{lists[i]} = 0'
 
-out = open('file_for_task_4.txt','a')
-out.writelines(f"{stroka}\n")
-out.close()
+with open('file_for_task_4.txt','w') as out:
+    out.writelines(stroka)
