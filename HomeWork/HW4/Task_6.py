@@ -1,8 +1,3 @@
-def print_dikt(slovar):
-    for i in sorted(slovar):
-        print(f"{i}: {', '.join(sorted(slovar[i]))}")
-
-
 def rev(n):
     return 1 if n == 0 else 0
 
@@ -26,12 +21,13 @@ frend_hand = dict()
 for i in frend:
     frend_hand[i] = list()
     for j in frend[i]:
-        frend_hand[i] += frend.get(j) # Добавляем друзей друзей
+        frend_hand[i] += frend.get(j)  # Добавляем друзей друзей
     frend_hand[i] = list(set(frend_hand[i]))  # Удаляем повторы
-    if i in frend_hand[i]:      # Удаляем текущую фамилию
+    if i in frend_hand[i]:  # Удаляем человека, чей ключ обрабатываем
         frend_hand[i].remove(i)
-    for j in frend[i]:           # Удаляем близких друзей
+    for j in frend[i]:  # Удаляем близких друзей
         if j in frend_hand[i]:
             frend_hand[i].remove(j)
 
-print_dikt(frend_hand)
+for i in sorted(frend_hand):
+    print(f"{i}: {', '.join(sorted(frend_hand[i]))}")
