@@ -22,7 +22,7 @@ while flag:
         flag = not flag
 
 
-frend_hand = {}
+frend_hand = dict()
 for i in frend:
     frend_hand[i] = list()
     for j in frend[i]:
