@@ -26,11 +26,11 @@ frend_hand = {}
 for i in frend:
     frend_hand[i] = list()
     for j in frend[i]:
-        frend_hand[i] += frend.get(j) 
-    frend_hand[i] = list(set(frend_hand[i]))  
-    if i in frend_hand[i]: 
+        frend_hand[i] += frend.get(j) # Добавляем друзей друзей
+    frend_hand[i] = list(set(frend_hand[i]))  # Удаляем повторы
+    if i in frend_hand[i]:      # Удаляем текущую фамилию
         frend_hand[i].remove(i)
-    for j in frend[i]:
+    for j in frend[i]:           # Удаляем близких друзей
         if j in frend_hand[i]:
             frend_hand[i].remove(j)
 
