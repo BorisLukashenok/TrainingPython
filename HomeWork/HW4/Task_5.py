@@ -21,7 +21,6 @@ def prepare(file_name):
             pol_dk[key] = 1 if stroka == "" else int(stroka)
         else:
             pol_dk[0] = int(pol_ls[i])
-
     return pol_dk
 
 
