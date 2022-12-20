@@ -8,7 +8,7 @@ minus = '-'
 
 def prepare(file_name):
     with open(file_name, "r") as inp:
-        pol_ls = inp.read().replace(" = 0\n", "").split(" ")
+        pol_ls = inp.read().replace(" = 0\n", "").split()
     if len(pol_ls) % 2 != 0:
         pol_ls.insert(0, '+')
     print(pol_ls)
@@ -25,7 +25,7 @@ def prepare(file_name):
             key = 0
             pol_dk[key] = int(pol_ls[i])
         if pol_ls[i-1] == minus:
-            pol_dk[key] *= -1
+            pol_dk[key] = - pol_dk[key]            
     return pol_dk
 
 
@@ -55,7 +55,7 @@ for i in range(stepen, -1, -1):
 stroka = f"{' + '.join(lists)} = 0"
 if minus in stroka:
     if stroka[0] == minus:
-        stroka = '+ '+stroka
+        stroka = '+ ' + stroka
     stroka = stroka.replace('+ -', '- ')
 print(stroka)
 with open(file_out, "w") as out:
