@@ -8,7 +8,8 @@
 # Ответ: True
 
 def same_by(characteristic, objects):
-    return len(list(filter(characteristic, objects))) == len(objects)
+    temp = type(objects)
+    return temp(filter(characteristic, objects)) == objects
 
 
 # Не понял почему с вашим примером не работает,
