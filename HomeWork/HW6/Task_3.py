@@ -19,6 +19,7 @@ print(same_by(lambda x: x % 2, [2, 4, 6, 8]))
 print(same_by(lambda x: x % 2 == 0, {2, 4, 7, 8}))
 
 print(same_by(lambda x: x > 2, [2, 4, 7, 8]))
-print(same_by(lambda x: x > 2, {3, 4, 7, 8}))
+print(same_by(lambda x: x > 2, (3, 4, 7, 8)))
 print(same_by(lambda x: x < 9, {3, 4, 7, 8}))
 print(same_by(lambda x: x < 9, {}))
+print(same_by(lambda x: x < 9, (3, 4, 7, 9)))
