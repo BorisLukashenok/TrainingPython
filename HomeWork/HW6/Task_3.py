@@ -13,6 +13,7 @@ def same_by(characteristic, objects):
 
 
 # Не понял почему с вашим примером не работает,
+print(same_by(lambda x: x % 2 == 0, [2, 4, 6, 8]))
 print(same_by(lambda x: x % 2, [2, 4, 6, 8]))
 # может потому что результат работы лямбда функции 0 и filter удаляет ее как false
 print(same_by(lambda x: x % 2, {2, 4, 7, 8}))
