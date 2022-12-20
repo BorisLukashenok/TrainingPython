@@ -1,9 +1,5 @@
-num = int(input())
-coordinates = [list(map(int, input().split(" "))) for i in range(num)]
-dct = {}
-for i in range(num):
-    tuple = (coordinates[i][0] // 10, coordinates[i][1] // 10)
-    if tuple not in dct:
-        dct[tuple] = 0
-    dct[tuple] += 1
-print(max(dct.values()))
+def same_by(characteristic, objects):
+    result = list(map(characteristic, objects))
+    print(all([i == result[0] for i in result]))
+same_by(lambda x: x % 2, [2,4,6,8])
+same_by(lambda x: x % 2, [2,4,7,8])
