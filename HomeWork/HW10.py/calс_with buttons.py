@@ -5,6 +5,10 @@ from telegram.ext import Application, CallbackQueryHandler, CommandHandler, Cont
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+value = ''
+old_value = ''
+
 keyboard = [
     [
         InlineKeyboardButton(" ", callback_data="no"),
@@ -40,22 +44,43 @@ keyboard = [
 
 
 async def calc(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Sends a message with three inline buttons attached."""
-
-    reply_markup = InlineKeyboardMarkup(keyboard)
-
-    await update.message.reply_text("Please choose:", reply_markup=reply_markup)
+    
+    global value
+    if value == "":
+        await update.message.reply_text(text="0", reply_markup=InlineKeyboardMarkup(keyboard))
+    else:
+        await update.message.reply_text(text=value, reply_markup=InlineKeyboardMarkup(keyboard))
 
 value = ''
+old_value = ''
+
 
 async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Parses the CallbackQuery and updates the message text."""
-    query = update.callback_query
-    await query.answer()
-    
-    
+    global value, old_value
+    data = update.callback_query
+    await data.answer()
 
-    await query.edit_message_text(text=f"Selected option: {query.data}")
+    if data[0] == "C":
+        value = ""
+    elif data[0] == "=":
+        try:
+            value = str(eval(value))
+        except:
+            value = "Ошибка!"
+    else:
+        value += str(data[0])
+
+    if value != old_value:
+        if value == "":
+            await data.edit_message_text(text="0", reply_markup=InlineKeyboardMarkup(keyboard))
+        else:
+            await data.edit_message_text(text=value, reply_markup=InlineKeyboardMarkup(keyboard))
+
+    old_value = value
+    if value == "Ошибка!":
+        value = ""
+
+    # await query.edit_message_text(text=f"Selected option: {query.data}")
 
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -65,15 +90,16 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 
 def main() -> None:
     """Run the bot."""
-    # Create the Application and pass it your bot's token.
-    application = Application.builder().token("TOKEN").build()
+    # Create the bot and pass it your bot's token.
+    bot = Application.builder().token(
+        "5642071095:AAGHwdeHvX3ZaXXg6WKpgEUEMVrE_-IbKqM").build()
 
-    application.add_handler(CommandHandler("calc", calc))
-    application.add_handler(CallbackQueryHandler(button))
-    application.add_handler(CommandHandler("help", help_command))
+    bot.add_handler(CommandHandler("calc", calc))
+    bot.add_handler(CallbackQueryHandler(button))
+    bot.add_handler(CommandHandler("help", help_command))
 
     # Run the bot until the user presses Ctrl-C
-    application.run_polling()
+    bot.run_polling()
 
 
 if __name__ == "__main__":
